@@ -1,0 +1,600 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>7 Days in Kazakhstan — Almaty & the Tian Shan</title>
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #fbf7ef;
+    --paper: #ffffff;
+    --ink: #1d2433;
+    --ink-soft: #4a5366;
+    --muted: #6b7383;
+    --line: #e6dfcf;
+    --line-soft: #efe9d9;
+    --accent: #1f6f8b;        /* Tian Shan blue */
+    --accent-soft: #d6e8ee;
+    --gold: #c89b3c;          /* steppe gold */
+    --gold-soft: #f4e7c4;
+    --green: #3d7a4f;         /* alpine larch */
+    --green-soft: #dbeadf;
+    --rust: #a84e2b;          /* Charyn canyon */
+    --rust-soft: #f4dccf;
+    --shadow: 0 1px 2px rgba(20,30,50,.04), 0 8px 24px rgba(20,30,50,.06);
+  }
+  * { box-sizing: border-box; }
+  html, body { background: var(--bg); color: var(--ink); }
+  body {
+    margin: 0;
+    font-family: ui-sans-serif, -apple-system, "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px dotted var(--accent); }
+  a:hover { border-bottom-style: solid; }
+  h1, h2, h3, h4 { font-family: "Iowan Old Style", "Cambria", Georgia, serif; letter-spacing: -0.01em; color: var(--ink); }
+  h1 { font-size: 2.4rem; line-height: 1.1; margin: 0; }
+  h2 { font-size: 1.6rem; margin: 0 0 .5rem; }
+  h3 { font-size: 1.15rem; margin: 0 0 .35rem; }
+  h4 { font-size: 0.95rem; margin: 1.1rem 0 .3rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+  p { margin: 0 0 .75rem; color: var(--ink-soft); }
+  small { color: var(--muted); }
+
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 20px; }
+
+  /* Hero */
+  .hero {
+    position: relative;
+    padding: 56px 0 36px;
+    background:
+      radial-gradient(1200px 380px at 80% -10%, rgba(31,111,139,.18), transparent 60%),
+      radial-gradient(900px 320px at 5% 110%, rgba(200,155,60,.18), transparent 60%),
+      linear-gradient(180deg, #fff 0%, var(--bg) 100%);
+    border-bottom: 1px solid var(--line);
+    overflow: hidden;
+  }
+  .hero .wrap { position: relative; }
+  .eyebrow {
+    display: inline-block;
+    font-size: .78rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-soft);
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin-bottom: 14px;
+  }
+  .hero h1 .accent { color: var(--accent); }
+  .hero .lede { max-width: 640px; margin-top: 14px; font-size: 1.05rem; color: var(--ink-soft); }
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0,1fr));
+    gap: 12px;
+    margin-top: 28px;
+  }
+  .stat {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 14px 16px;
+    box-shadow: var(--shadow);
+  }
+  .stat .k { font-size: .72rem; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); }
+  .stat .v { font-family: "Iowan Old Style", Georgia, serif; font-size: 1.15rem; color: var(--ink); margin-top: 4px; }
+
+  /* Topo line decoration */
+  .topo {
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 60px;
+    pointer-events: none;
+    opacity: .35;
+  }
+
+  /* Sticky day nav */
+  .daynav {
+    position: sticky; top: 0; z-index: 5;
+    background: rgba(251,247,239,.92);
+    backdrop-filter: saturate(140%) blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .daynav .wrap { display: flex; gap: 6px; overflow-x: auto; padding: 10px 20px; }
+  .daynav a {
+    flex: 0 0 auto;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: .85rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .daynav a:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* Section spacing */
+  section { padding: 36px 0; }
+  section + section { border-top: 1px solid var(--line-soft); }
+
+  /* Day card */
+  .day {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 28px;
+    align-items: start;
+    padding: 28px 0;
+  }
+  .day + .day { border-top: 1px dashed var(--line); }
+  .day .meta { position: sticky; top: 60px; }
+  .day .pill-day {
+    display: inline-block;
+    background: var(--gold-soft);
+    color: #6f4f10;
+    border: 1px solid #e7d39a;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: .8rem;
+    letter-spacing: .04em;
+  }
+  .day .date { font-family: "Iowan Old Style", Georgia, serif; font-size: 1.4rem; margin-top: 8px; }
+  .day .where { color: var(--muted); margin-top: 2px; font-size: .92rem; }
+  .day .tags { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag {
+    font-size: .75rem;
+    padding: 3px 8px;
+    border-radius: 6px;
+    border: 1px solid transparent;
+  }
+  .tag.blue { background: var(--accent-soft); color: #18556a; border-color: #b9d6e0; }
+  .tag.gold { background: var(--gold-soft); color: #6f4f10; border-color: #e7d39a; }
+  .tag.green { background: var(--green-soft); color: #2a5b39; border-color: #b8d4be; }
+  .tag.rust { background: var(--rust-soft); color: #7d381a; border-color: #ecbfa6; }
+
+  .day .body {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 22px 24px;
+    box-shadow: var(--shadow);
+  }
+
+  /* Timeline */
+  .timeline { margin: 8px 0 4px; padding: 0; list-style: none; }
+  .timeline li {
+    display: grid;
+    grid-template-columns: 84px 1fr;
+    gap: 14px;
+    padding: 8px 0;
+    border-top: 1px dashed var(--line-soft);
+  }
+  .timeline li:first-child { border-top: 0; }
+  .timeline .t { color: var(--accent); font-variant-numeric: tabular-nums; font-size: .9rem; }
+  .timeline .d { color: var(--ink-soft); }
+  .timeline .d strong { color: var(--ink); }
+
+  .twocol { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 10px; }
+  .panel {
+    background: #fffdf7;
+    border: 1px solid var(--line-soft);
+    border-radius: 12px;
+    padding: 12px 14px;
+  }
+  .panel .label { font-size: .72rem; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-bottom: 4px; }
+  .panel .val { color: var(--ink); }
+
+  /* Section blocks (practical info) */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 18px 20px;
+    box-shadow: var(--shadow);
+  }
+  .card h3 { display: flex; align-items: center; gap: 8px; }
+  .dot {
+    display: inline-block; width: 10px; height: 10px; border-radius: 50%;
+    background: var(--accent);
+  }
+  .dot.gold { background: var(--gold); }
+  .dot.green { background: var(--green); }
+  .dot.rust { background: var(--rust); }
+
+  ul.tidy { margin: 6px 0 0; padding-left: 18px; }
+  ul.tidy li { margin: 4px 0; color: var(--ink-soft); }
+
+  table.kv { width: 100%; border-collapse: collapse; }
+  table.kv td { padding: 6px 0; border-bottom: 1px dashed var(--line-soft); vertical-align: top; }
+  table.kv td:first-child { color: var(--muted); width: 38%; font-size: .9rem; }
+  table.kv tr:last-child td { border-bottom: 0; }
+
+  .footer {
+    padding: 28px 0 48px;
+    color: var(--muted);
+    font-size: .88rem;
+    text-align: center;
+  }
+
+  @media (max-width: 760px) {
+    h1 { font-size: 1.8rem; }
+    .hero-stats { grid-template-columns: repeat(2, 1fr); }
+    .day { grid-template-columns: 1fr; gap: 14px; }
+    .day .meta { position: static; }
+    .twocol, .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    .timeline li { grid-template-columns: 70px 1fr; }
+  }
+</style>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <span class="eyebrow">Aug 1 – 7, 2026 · Two travellers</span>
+      <h1>Seven Days in <span class="accent">Kazakhstan</span><br/>Almaty &amp; the Tian Shan</h1>
+      <p class="lede">A week split between the cosmopolitan culture of Almaty and the alpine lakes, sandstone canyons, and Kazakh village hospitality of the surrounding Tian Shan. Mid-range with selective splurges, moderate-to-high fitness, rental car for the road days.</p>
+      <div class="hero-stats">
+        <div class="stat"><div class="k">Route</div><div class="v">SIN ⇄ KUL ⇄ ALA</div></div>
+        <div class="stat"><div class="k">Carrier</div><div class="v">AirAsia X</div></div>
+        <div class="stat"><div class="k">On the ground</div><div class="v">7 days · 6 nights</div></div>
+        <div class="stat"><div class="k">Style</div><div class="v">Culture + day hikes</div></div>
+      </div>
+    </div>
+    <svg class="topo" viewBox="0 0 1200 60" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,40 C120,10 240,55 360,30 C480,5 600,55 720,30 C840,10 960,55 1080,28 C1140,15 1200,40 1200,40 L1200,60 L0,60 Z" fill="#1f6f8b" opacity=".15"/>
+      <path d="M0,46 C150,28 300,58 450,40 C600,22 750,55 900,38 C1050,22 1200,46 1200,46 L1200,60 L0,60 Z" fill="#c89b3c" opacity=".12"/>
+    </svg>
+  </header>
+
+  <nav class="daynav" aria-label="Day navigation">
+    <div class="wrap">
+      <a href="#day1">Day 1 · Arrive</a>
+      <a href="#day2">Day 2 · Almaty</a>
+      <a href="#day3">Day 3 · BAL hike</a>
+      <a href="#day4">Day 4 · Charyn → Saty</a>
+      <a href="#day5">Day 5 · Kolsai &amp; Kaindy</a>
+      <a href="#day6">Day 6 · Return</a>
+      <a href="#day7">Day 7 · Depart</a>
+      <a href="#practical">Practical</a>
+      <a href="#packing">Packing</a>
+    </div>
+  </nav>
+
+  <main class="wrap">
+
+    <!-- DAY 1 -->
+    <section id="day1">
+      <article class="day">
+        <aside class="meta">
+          <span class="pill-day">Day 1</span>
+          <div class="date">Sat · Aug 1</div>
+          <div class="where">Almaty</div>
+          <div class="tags">
+            <span class="tag blue">Arrival</span>
+            <span class="tag gold">Easy day</span>
+          </div>
+        </aside>
+        <div class="body">
+          <h2>Arrive Almaty — soft landing</h2>
+          <p>Overnight AirAsia X from KUL lands early morning. Drop bags, grab a long breakfast, and pace the day around a cable-car sunset rather than hard sightseeing.</p>
+          <ul class="timeline">
+            <li><span class="t">~05:00</span><span class="d"><strong>Land at ALA.</strong> Visa-free for Singapore passports up to 30 days. Grab tenge from an ATM in arrivals; buy a Beeline or Kcell SIM at the kiosk.</span></li>
+            <li><span class="t">06:30</span><span class="d"><strong>Taxi to hotel</strong> (Yandex Go works like Uber here, ~3,500–5,000 ₸). Early check-in if available; otherwise leave bags.</span></li>
+            <li><span class="t">10:00</span><span class="d"><strong>Breakfast at Daredzhani</strong> (Georgian, near Panfilov) — khachapuri and strong coffee.</span></li>
+            <li><span class="t">11:30</span><span class="d"><strong>Panfilov Park &amp; Zenkov Cathedral</strong> — wooden Russian Orthodox cathedral built without a single nail. Memorial of Glory next door.</span></li>
+            <li><span class="t">13:30</span><span class="d"><strong>Green Bazaar (Zelyony Bazar)</strong> — horse meat, kurt, dried fruit, samsas. Snack-graze rather than sit-down lunch.</span></li>
+            <li><span class="t">15:00</span><span class="d"><strong>Hotel — nap.</strong> You've been awake 24+ hours. Take it.</span></li>
+            <li><span class="t">18:30</span><span class="d"><strong>Kok-Tobe cable car</strong> from Dostyk Ave for sunset over the city and Tian Shan ridge.</span></li>
+            <li><span class="t">20:30</span><span class="d"><strong>Dinner at Kazakh Auyl</strong> or <strong>Navat</strong> — beshbarmak, manti, kazy, and a shot of kumys for ceremony's sake.</span></li>
+          </ul>
+          <div class="twocol">
+            <div class="panel"><div class="label">Lodging</div><div class="val">Almaty centre — Rixos Almaty (splurge), Dostyk Hotel (mid), or Renion Park near Panfilov.</div></div>
+            <div class="panel"><div class="label">Cost-value upgrade</div><div class="val">Pay a bit more to be walking distance to Panfilov / Arbat. Halves your taxi load all week.</div></div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- DAY 2 -->
+    <section id="day2">
+      <article class="day">
+        <aside class="meta">
+          <span class="pill-day">Day 2</span>
+          <div class="date">Sun · Aug 2</div>
+          <div class="where">Almaty</div>
+          <div class="tags">
+            <span class="tag blue">Culture</span>
+            <span class="tag gold">Cuisine</span>
+          </div>
+        </aside>
+        <div class="body">
+          <h2>Almaty — culture, history, the long lunch</h2>
+          <p>A full city day. Soviet-era civic architecture, the Kazakh national story at the museum, then a steam at the Arasan baths and dinner at the city's best Kazakh table.</p>
+          <ul class="timeline">
+            <li><span class="t">09:00</span><span class="d"><strong>Coffee + walk down Arbat</strong> (Zhibek Zholy pedestrian street).</span></li>
+            <li><span class="t">10:00</span><span class="d"><strong>Central State Museum of Kazakhstan</strong> — golden Saka warrior, nomadic material culture, Soviet years to independence (~2 hrs).</span></li>
+            <li><span class="t">12:30</span><span class="d"><strong>Republic Square &amp; Independence Monument</strong>; loop past the brutalist Hotel Kazakhstan.</span></li>
+            <li><span class="t">13:30</span><span class="d"><strong>Lunch at Tubeteika</strong> (modern Central Asian) or <strong>Lanzhou</strong> (Dungan/Uyghur lagman) — both legendary, both cheap.</span></li>
+            <li><span class="t">15:30</span><span class="d"><strong>Arasan Baths</strong> — Soviet-era bath complex with Russian, Finnish, and Turkish rooms. Rent a felt hat; it's not optional.</span></li>
+            <li><span class="t">18:00</span><span class="d"><strong>Stroll Dostyk Ave</strong>; aperitif at the rooftop of Plaza or Esentai.</span></li>
+            <li><span class="t">20:00</span><span class="d"><strong>Dinner at Auyl</strong> — the city's flagship Kazakh restaurant in a yurt-style space; book ahead. The horse-meat tasting is the move.</span></li>
+          </ul>
+          <div class="twocol">
+            <div class="panel"><div class="label">Splurge worth it</div><div class="val">Auyl. Best representation of Kazakh cuisine in the country.</div></div>
+            <div class="panel"><div class="label">If wet weather</div><div class="val">Swap Republic Sq. for the Museum of Folk Musical Instruments — small, charming, in Panfilov Park.</div></div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- DAY 3 -->
+    <section id="day3">
+      <article class="day">
+        <aside class="meta">
+          <span class="pill-day">Day 3</span>
+          <div class="date">Mon · Aug 3</div>
+          <div class="where">Big Almaty Lake</div>
+          <div class="tags">
+            <span class="tag green">Hike</span>
+            <span class="tag blue">Alpine</span>
+          </div>
+        </aside>
+        <div class="body">
+          <h2>Big Almaty Lake — first taste of the Tian Shan</h2>
+          <p>An accessible, knockout day hike from town. Glacial-blue lake at 2,500 m ringed by 4,000 m peaks. Pick up the rental car late afternoon for tomorrow's drive.</p>
+          <ul class="timeline">
+            <li><span class="t">07:30</span><span class="d"><strong>Hotel breakfast</strong>; pack layers, water (2 L pp), sunscreen, snacks.</span></li>
+            <li><span class="t">08:30</span><span class="d"><strong>Yandex taxi or pre-arranged driver</strong> to the BAL viewpoint trailhead at the dam (~1 hr, ~6,000 ₸ one way; arrange return). Note: a checkpoint requires passport — bring it.</span></li>
+            <li><span class="t">10:00</span><span class="d"><strong>Hike</strong>: walk the lake's east shore to the second viewpoint (~3–4 hrs round-trip, gentle). Strong hikers can continue toward the cosmostation at 3,300 m for a longer day.</span></li>
+            <li><span class="t">14:30</span><span class="d"><strong>Late lunch back in town</strong> — Salam Bro for shashlik, or Bao for Vietnamese.</span></li>
+            <li><span class="t">16:30</span><span class="d"><strong>Pick up rental car</strong> (Avis / Sixt / local Naprokat). 4×4 strongly recommended for the Saty road. Confirm IDP, full tank, and that the spare is real.</span></li>
+            <li><span class="t">19:30</span><span class="d"><strong>Dinner at Brioche</strong> (modern, lighter) or <strong>Mamasita</strong> if you want a break from steppe food before two car days.</span></li>
+          </ul>
+          <div class="twocol">
+            <div class="panel"><div class="label">Hike stats</div><div class="val">~8–12 km · 200–600 m elevation depending on turnaround · 3–6 hrs.</div></div>
+            <div class="panel"><div class="label">Altitude note</div><div class="val">Lake sits at 2,500 m. Most people are fine; go slow if you feel headachy.</div></div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- DAY 4 -->
+    <section id="day4">
+      <article class="day">
+        <aside class="meta">
+          <span class="pill-day">Day 4</span>
+          <div class="date">Tue · Aug 4</div>
+          <div class="where">Almaty → Charyn → Saty</div>
+          <div class="tags">
+            <span class="tag rust">Canyon</span>
+            <span class="tag gold">Road day</span>
+          </div>
+        </aside>
+        <div class="body">
+          <h2>Charyn Canyon &amp; the road to Saty village</h2>
+          <p>Big driving day, but the kind you book the trip for: Almaty's apple orchards giving way to dry steppe, then Charyn's red-rock spires, then a high pass into the Kolsai valley.</p>
+          <ul class="timeline">
+            <li><span class="t">07:00</span><span class="d"><strong>Depart Almaty</strong> east on the A351. Stop at a roadside <strong>samsa stand</strong> in Chilik for breakfast.</span></li>
+            <li><span class="t">10:30</span><span class="d"><strong>Charyn Canyon — Valley of Castles</strong>. Park at the rim, hike down (~1 km, ~150 m descent) into the canyon floor, walk through the spires to the Charyn River. Allow 2.5–3 hrs total. Hot &amp; exposed — start early, hat &amp; water non-negotiable.</span></li>
+            <li><span class="t">13:30</span><span class="d"><strong>Lunch at the canyon yurt café</strong> (lagman, plov, tea) before pushing on.</span></li>
+            <li><span class="t">15:00</span><span class="d"><strong>Drive to Saty</strong> via Kegen — ~140 km, ~2.5 hrs. Last stretch is rough gravel; take it slow. Pin offline maps before you lose signal.</span></li>
+            <li><span class="t">18:00</span><span class="d"><strong>Check in at a Saty guesthouse</strong> (Zhanyl, Asyl, or Zhibek Zholy) — family-run homes with private rooms, banya, home-cooked dinner included.</span></li>
+            <li><span class="t">20:00</span><span class="d"><strong>Dinner with the host family</strong> — typically lagman or beshbarmak, fresh bread, jam, dairy. Early to bed.</span></li>
+          </ul>
+          <div class="twocol">
+            <div class="panel"><div class="label">Driving</div><div class="val">~340 km · 5–6 hrs total moving time. Police speed checks are common — keep to the limits.</div></div>
+            <div class="panel"><div class="label">Cash</div><div class="val">Saty has no ATMs. Withdraw enough tenge in Almaty for guesthouses, park fees, fuel detours.</div></div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- DAY 5 -->
+    <section id="day5">
+      <article class="day">
+        <aside class="meta">
+          <span class="pill-day">Day 5</span>
+          <div class="date">Wed · Aug 5</div>
+          <div class="where">Kolsai &amp; Kaindy</div>
+          <div class="tags">
+            <span class="tag green">Big hike</span>
+            <span class="tag blue">Lakes</span>
+          </div>
+        </aside>
+        <div class="body">
+          <h2>Kaindy's drowned forest + the Kolsai traverse</h2>
+          <p>The marquee day. Two of the most photographed places in Kazakhstan, and a real hike between them. Aim Kaindy first while it's quiet, then Kolsai for the long afternoon.</p>
+          <ul class="timeline">
+            <li><span class="t">07:30</span><span class="d"><strong>Quick breakfast at the guesthouse</strong> — eggs, kasha, bread, jam. Pack lunch from the kitchen.</span></li>
+            <li><span class="t">08:30</span><span class="d"><strong>Drive to Kaindy Lake</strong> (~30 min) — last 4 km is rough; either drive your 4×4 or hire a UAZ shuttle from the gate (~2,500 ₸ pp). Walk the shoreline; the submerged Tien Shan spruce trunks are what you came for. ~1.5 hrs.</span></li>
+            <li><span class="t">11:30</span><span class="d"><strong>Drive to Lower Kolsai</strong> (~45 min). Pay the national-park fee at the gate.</span></li>
+            <li><span class="t">12:30</span><span class="d"><strong>Hike Lower → Middle Kolsai</strong>. ~8 km one way, ~600 m up through Tien Shan spruce forest, finishing at a turquoise lake at 2,250 m. Allow 5–6 hrs round trip with photos and lunch lakeside.</span></li>
+            <li><span class="t">19:00</span><span class="d"><strong>Back to Saty</strong>. Banya at the guesthouse, then dinner.</span></li>
+          </ul>
+          <div class="twocol">
+            <div class="panel"><div class="label">Hike stats</div><div class="val">~16 km round trip · ~600 m gain · 5–6 hrs. Trail is well-trodden but rooty &amp; muddy in spots.</div></div>
+            <div class="panel"><div class="label">If you want more</div><div class="val">Camp by Middle Kolsai and continue to Upper Kolsai (third lake) the next morning. Skip Day 6 leisurely return for an extra night in the mountains.</div></div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- DAY 6 -->
+    <section id="day6">
+      <article class="day">
+        <aside class="meta">
+          <span class="pill-day">Day 6</span>
+          <div class="date">Thu · Aug 6</div>
+          <div class="where">Saty → Issyk → Almaty</div>
+          <div class="tags">
+            <span class="tag blue">Drive</span>
+            <span class="tag gold">Last night</span>
+          </div>
+        </aside>
+        <div class="body">
+          <h2>The long way back via Issyk Lake</h2>
+          <p>A scenic return route over the Asy Plateau (weather permitting) or the standard road via Chilik. End the trip with a celebratory dinner in Almaty.</p>
+          <ul class="timeline">
+            <li><span class="t">08:00</span><span class="d"><strong>Goodbye breakfast</strong> at the guesthouse, settle up in cash.</span></li>
+            <li><span class="t">09:00</span><span class="d"><strong>Drive toward Almaty</strong>. Optional detour: <strong>Issyk Lake</strong> (Esik) — alpine lake re-formed after the 1963 mudflow, easy lakeshore stroll, decent café (~1 hr off the route).</span></li>
+            <li><span class="t">14:00</span><span class="d"><strong>Arrive Almaty</strong>; return rental car at the agency. Re-check into a downtown hotel.</span></li>
+            <li><span class="t">15:30</span><span class="d"><strong>Free afternoon</strong>: Esentai Mall for souvenirs (felt slippers, Almaty apples are in season, cognac), or a coffee at <strong>Wood Coffee</strong> on Tulebaeva.</span></li>
+            <li><span class="t">19:30</span><span class="d"><strong>Final dinner — splurge.</strong> <em>Zheti Kazyna</em> for refined Kazakh tasting, or <em>Sandyq</em> in the foothills for a yurt-style farewell.</span></li>
+          </ul>
+          <div class="twocol">
+            <div class="panel"><div class="label">Driving</div><div class="val">~290 km · 4.5 hrs without detour, +1 hr for Issyk.</div></div>
+            <div class="panel"><div class="label">Pre-flight admin</div><div class="val">Repack so your hand luggage holds anything fragile/valuable; AirAsia X has strict cabin weights.</div></div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- DAY 7 -->
+    <section id="day7">
+      <article class="day">
+        <aside class="meta">
+          <span class="pill-day">Day 7</span>
+          <div class="date">Fri · Aug 7</div>
+          <div class="where">Almaty → KUL → SIN</div>
+          <div class="tags">
+            <span class="tag blue">Departure</span>
+          </div>
+        </aside>
+        <div class="body">
+          <h2>Fly home</h2>
+          <p>Morning flight to KUL, connect to SIN. ALA airport is 25 minutes from downtown but plan for 60 with traffic.</p>
+          <ul class="timeline">
+            <li><span class="t">06:30</span><span class="d"><strong>Hotel breakfast / pack-out.</strong></span></li>
+            <li><span class="t">07:30</span><span class="d"><strong>Yandex to ALA</strong>. Be at the airport 3 hrs before departure for an international AirAsia X flight.</span></li>
+            <li><span class="t">10:30</span><span class="d"><strong>ALA → KUL.</strong> Connect at KLIA2.</span></li>
+            <li><span class="t">later</span><span class="d"><strong>KUL → SIN.</strong> Home.</span></li>
+          </ul>
+          <div class="twocol">
+            <div class="panel"><div class="label">Souvenirs</div><div class="val">Apple cognac, kurt (the dried curd kind), felt-work, dombra strings if you've made a friend.</div></div>
+            <div class="panel"><div class="label">Don't bring back</div><div class="val">Horse-meat sausages — Singapore customs won't like them.</div></div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- PRACTICAL -->
+    <section id="practical">
+      <h2>Practical info</h2>
+      <p>Quick-reference for the boring-but-important stuff. Confirm prices and schedules closer to travel; this was assembled in May 2026.</p>
+
+      <div class="grid-2" style="margin-top: 18px;">
+        <div class="card">
+          <h3><span class="dot"></span>Flights — AirAsia X</h3>
+          <table class="kv">
+            <tr><td>SIN → KUL</td><td>AirAsia (AK), short hop, multiple daily.</td></tr>
+            <tr><td>KUL → ALA</td><td>AirAsia X (D7), typically a late-evening departure arriving Almaty in the early morning.</td></tr>
+            <tr><td>ALA → KUL</td><td>D7 morning departure, arriving KUL afternoon.</td></tr>
+            <tr><td>KUL → SIN</td><td>AK same-day connection.</td></tr>
+            <tr><td>Tip</td><td>Book through-tickets via airasia.com so missed connections are protected. Pay for checked bags + meals at booking, not at the gate.</td></tr>
+          </table>
+        </div>
+        <div class="card">
+          <h3><span class="dot gold"></span>Visa &amp; entry</h3>
+          <table class="kv">
+            <tr><td>Singapore passport</td><td>Visa-free for stays up to 30 days.</td></tr>
+            <tr><td>Passport validity</td><td>6 months beyond entry, 1 blank page.</td></tr>
+            <tr><td>Onward ticket</td><td>Sometimes asked for at check-in; have your AirAsia X return printed.</td></tr>
+            <tr><td>Registration</td><td>Hotels register you automatically. Guesthouses in Saty usually do too — confirm.</td></tr>
+          </table>
+        </div>
+
+        <div class="card">
+          <h3><span class="dot green"></span>Money &amp; SIM</h3>
+          <table class="kv">
+            <tr><td>Currency</td><td>Kazakhstani tenge (₸). Roughly 1 SGD ≈ 350–380 ₸.</td></tr>
+            <tr><td>Cards</td><td>Widely accepted in Almaty (Visa/MC). Cash-only outside the city — withdraw before driving out.</td></tr>
+            <tr><td>SIM</td><td>Beeline or Kcell at ALA arrivals. ~5,000 ₸ for a tourist data pack. Coverage drops in the Kolsai/Saty area.</td></tr>
+            <tr><td>Apps</td><td>Yandex Go (taxis), 2GIS (offline maps for Almaty &amp; oblasts), Google Translate Russian/Kazakh offline pack.</td></tr>
+          </table>
+        </div>
+        <div class="card">
+          <h3><span class="dot rust"></span>Driving</h3>
+          <table class="kv">
+            <tr><td>Side</td><td>Right-hand drive. International Driving Permit required.</td></tr>
+            <tr><td>Vehicle</td><td>Compact SUV / 4×4 strongly recommended for the Saty road and Kaindy track. Confirm spare, jack, and warning triangle.</td></tr>
+            <tr><td>Fuel</td><td>AI-92 / AI-95 widely available; top up before leaving Almaty and again at Chilik or Kegen.</td></tr>
+            <tr><td>Police</td><td>Speed checks frequent on the A351. Stick to limits, keep documents handy.</td></tr>
+            <tr><td>Cost</td><td>~SGD 90–140/day for a 4×4 from a major agency, less from local outfits.</td></tr>
+          </table>
+        </div>
+
+        <div class="card">
+          <h3><span class="dot"></span>Weather (early August)</h3>
+          <table class="kv">
+            <tr><td>Almaty city</td><td>Hot, dry. 28–34 °C days, 16–20 °C nights.</td></tr>
+            <tr><td>BAL / Kolsai</td><td>Cool: 12–22 °C days, 4–8 °C nights. Afternoon thunderstorms possible.</td></tr>
+            <tr><td>Charyn Canyon</td><td>Very hot &amp; exposed at midday — start early.</td></tr>
+            <tr><td>Layers</td><td>Pack like shoulder season for the mountains, summer for the city.</td></tr>
+          </table>
+        </div>
+        <div class="card">
+          <h3><span class="dot gold"></span>Estimated budget (2 pax, 7 days)</h3>
+          <table class="kv">
+            <tr><td>Flights (SIN-ALA r/t)</td><td>~SGD 1,400–1,800 pp on AirAsia X promo / ~SGD 2,200 standard.</td></tr>
+            <tr><td>Accommodation</td><td>Almaty mid-range: SGD 130–200/night. Saty guesthouse w/ meals: ~SGD 60–80/night for two.</td></tr>
+            <tr><td>Rental car (4 days)</td><td>~SGD 400–550 incl. fuel.</td></tr>
+            <tr><td>Food</td><td>SGD 30–80/day for two, eating well; Auyl/splurge meals SGD 100–150.</td></tr>
+            <tr><td>Park fees, fuel, taxis</td><td>~SGD 150 buffer.</td></tr>
+            <tr><td><strong>Total ex-flights</strong></td><td><strong>~SGD 2,200–3,000 for two.</strong></td></tr>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- PACKING -->
+    <section id="packing">
+      <h2>Packing &amp; pre-trip checklist</h2>
+      <div class="grid-3" style="margin-top: 14px;">
+        <div class="card">
+          <h3><span class="dot green"></span>Hiking</h3>
+          <ul class="tidy">
+            <li>Trail runners or light boots (broken in)</li>
+            <li>20–25 L daypack</li>
+            <li>2 L water capacity per person</li>
+            <li>Insulating mid-layer + light shell</li>
+            <li>Sun hat, sunglasses, SPF 50</li>
+            <li>Bug repellent (mosquitoes near lakes)</li>
+            <li>Headlamp + spare batteries</li>
+            <li>Snack bars, electrolyte tabs</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3><span class="dot"></span>City &amp; everyday</h3>
+          <ul class="tidy">
+            <li>Smart-casual outfit for Auyl / final dinner</li>
+            <li>Modest layer for cathedral/museum</li>
+            <li>Universal adapter (Type C/F)</li>
+            <li>Power bank (BAL/Kolsai = no charging)</li>
+            <li>Reusable water bottle</li>
+            <li>Cash USD / SGD to exchange (small bills)</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3><span class="dot rust"></span>Pre-trip admin</h3>
+          <ul class="tidy">
+            <li>Book D7 flights + seats early</li>
+            <li>Reserve Almaty hotel + Saty guesthouse</li>
+            <li>Reserve rental car (specify 4×4)</li>
+            <li>Print/save IDP and passport scans</li>
+            <li>Travel insurance covering hiking</li>
+            <li>Notify bank of Kazakhstan travel</li>
+            <li>Download offline maps + Russian phrases</li>
+            <li>Book Auyl ~1 week ahead</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer">
+      Built as a Cowork artifact · Aug 1–7, 2026 · Itinerary v1
+    </div>
+  </main>
+</body>
+</html>
